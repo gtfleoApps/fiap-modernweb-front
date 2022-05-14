@@ -1,7 +1,17 @@
 <article>
     <!-- <h1>{{titleProp}}</h1> -->
-    <p>{{noteProp.date | date: "dd/MM/yyyy hh:mm"}}</p>
+    <!-- <p>{{noteProp.date | date: "dd/MM/yyyy hh:mm"}}</p> -->
+
+    <!-- aqui-leo: -->
+    <p>
+        <span>{{noteProp.date | date: "dd/MM/yyyy hh:mm"}}</span>
+        <span> (ID: {{noteProp.id}})</span>
+    </p>
+
     <p>{{noteProp.text}}</p>
-    <span *ngIf="noteProp.urgent" class="material-icons" id="priority">priority_high</span>
-    <span class="material-icons" (click)="confirmRemove()"> delete_forever </span>
+    <div class="note-icons">
+        <span *ngIf="noteProp.urgent" class="material-icons" id="priority">priority_high</span>
+        <span class="material-icons" (click)="sendNoteToForm()">edit</span>
+        <span class="material-icons" (click)="confirmRemove()"> delete_forever </span>
+    </div>
 </article>

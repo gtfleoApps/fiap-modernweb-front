@@ -44,4 +44,9 @@ export class NoteComponent implements OnInit {
     }
   }
 
+  // aqui-leo:
+  sendNoteToForm() {
+    alert("Enviar para formulario");
+    // this.notify.emit();
+  }
 }

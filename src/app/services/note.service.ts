@@ -15,6 +15,7 @@ export class NoteService {
 
   constructor(private http: HttpClient) {
     this.apiUrl = "https://fiap-notes-api.herokuapp.com"
+    // this.apiUrl = "https://localhost:3333"
   }
 
   private notes = [
@@ -65,5 +66,9 @@ export class NoteService {
   postNotes(textNote: string) {
     // o post retorna algo <aqui declarado um Note>:
     return this.http.post<Note>(`${this.apiUrl}/notes`, { text: textNote });
+  }
+
+  putNote(noteId: number, textNote: string) {
+    return this.http.put<Note>(`${this.apiUrl}/notes/${noteId}`, { text: textNote });
   }
 }

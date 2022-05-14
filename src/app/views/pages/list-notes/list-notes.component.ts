@@ -45,8 +45,10 @@ export class ListNotesComponent implements OnInit {
     // Atualizando a lista de notas:
     this.subscription = this.noteService.newNoteProvider.subscribe({
       next: (note: Note) => {
-        // this.getApiNotes(); 
-        this.notes.push(note);
+        // this.notes.push(note);
+
+        // aqui-leo:
+        this.getApiNotes();
       },
       error: () => { }
     });
@@ -71,6 +73,12 @@ export class ListNotesComponent implements OnInit {
     this.noteService.removeNote(noteId).subscribe(
       // () => this.getApiNotes() // atualizacao chamando a api
       () => this.notes = this.notes.filter(note => note.id !== noteId) // atualizacao com filter
+    );
+  }
+
+  updateNote(noteId: number, textNote: string) {
+    this.noteService.putNote(noteId, textNote).subscribe(
+      () => this.getApiNotes() // atualizacao chamando a api      
     );
   }
 

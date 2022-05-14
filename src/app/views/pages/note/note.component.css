@@ -14,9 +14,9 @@ article p:first-child {
 }
 
 article .material-icons {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+    position: relative;
+    /* bottom: 5px;
+    right: 5px; */
     font-size: 32px;
     cursor: pointer;
     transition: 0.2s;
@@ -28,9 +28,18 @@ article .material-icons:hover {
     transform: rotate(360deg);
 }
 
-#priority {
+/* #priority {
     position: absolute;
     bottom: 5px;
     left: 5px;
     width: fit-content;
+} */
+
+/* aqui-leo: */
+article .note-icons {
+    bottom: 5px;
+    right: 5px;
+    position: absolute;
+    flex: content;
+    flex-direction: column-reverse;
 }
