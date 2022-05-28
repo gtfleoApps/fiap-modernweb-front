@@ -5,14 +5,11 @@
     <div class="input-group">
       <label>
         Nota:
-        <!-- aqui leo -->
         <span formControlName="idNote">{{idNote?.value}}</span>
       </label>
 
-
       <textarea type="text" id="input-cpf" formControlName="textNote" required placeholder="Digite a nota"></textarea>
       <div *ngIf="textNote?.touched">
-        <!-- {{textNote?.errors?.['required']}} -->
         <div class="errors" *ngIf="textNote?.errors?.['required']">
           Este campo é obrigatório.
         </div>
@@ -22,5 +19,6 @@
       </div>
     </div>
     <button [disabled]="!checkoutForm?.valid">Salvar</button>
+    <button (click)="resetForm()">Limpar</button>
   </form>
 </aside>

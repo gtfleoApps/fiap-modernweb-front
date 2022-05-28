@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Note } from 'src/app/services/@types/note';
+import { NoteService } from 'src/app/services/note.service';
 
 // interface Note {
 //   id: number;
@@ -15,13 +16,6 @@ import { Note } from 'src/app/services/@types/note';
 })
 export class NoteComponent implements OnInit {
 
-  // note = {
-  //   id: 1,
-  //   date: new Date(),
-  //   text: "Um texto qualquer",
-  //   urgent: true
-  // }
-
   // @Input: decorator que indica que essa propriedade serah injetavel:
   @Input()
   noteProp = {} as Note;
@@ -33,7 +27,7 @@ export class NoteComponent implements OnInit {
   @Output()
   notify = new EventEmitter();
 
-  constructor() { }
+  // constructor() { }
 
   ngOnInit(): void {
   }
@@ -44,9 +38,13 @@ export class NoteComponent implements OnInit {
     }
   }
 
-  // aqui-leo:
+  //---------------------------------------------------------------------
+  constructor(
+    private noteService: NoteService
+  ) { }
+
   sendNoteToForm() {
-    alert("Enviar para formulario");
-    // this.notify.emit();
+    // alert("Enviar p/ formulario: " + this.noteProp.id + " " + this.noteProp.text);
+    this.noteService.notifySendNoteToForm(this.noteProp);
   }
 }

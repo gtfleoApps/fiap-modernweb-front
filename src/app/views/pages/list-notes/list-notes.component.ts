@@ -38,6 +38,7 @@ export class ListNotesComponent implements OnInit {
   //     urgent: false
   //   }
   // ]  
+
   subscription: Subscription;
 
   // injetando a dependência do service:

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { Note } from 'src/app/services/@types/note';
 import { NoteService } from 'src/app/services/note.service';
 
 @Component({
@@ -15,20 +17,31 @@ export class FormNoteComponent implements OnInit {
 
   checkoutForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
-    private noteService: NoteService) {
-    this.checkoutForm = this.formBuilder.group({
-      // campos do formulario:
-      // aqui-leo:
-      idNote: '2',
+  subscriptionEditNote: Subscription;
 
-      textNote: ['',
-        [Validators.required,
-        Validators.minLength(5)]], // formControlName no html
-    })
+  constructor(
+    private formBuilder: FormBuilder,
+    private noteService: NoteService
+  ) {
+
+    this.subscriptionEditNote = this.noteService.editNoteProvider.subscribe({
+      next: (note: Note) => {
+        this.checkoutForm.setValue({
+          idNote: note.id,
+          textNote: note.text
+        })
+      },
+      error: () => { }
+    });
+
+    this.checkoutForm = this.formBuilder.group({
+      idNote: '',
+      textNote: ['', [Validators.required, Validators.minLength(5)]],
+    });
   }
 
   ngOnInit(): void {
+    // this.setFormFromNote("", ""); // aqui-leo:     
   }
 
   sendNote() {
@@ -67,6 +80,10 @@ export class FormNoteComponent implements OnInit {
 
   get textNote() {
     return this.checkoutForm.get('textNote');
+  }
+
+  resetForm() {
+    this.checkoutForm.reset();
   }
 
 }

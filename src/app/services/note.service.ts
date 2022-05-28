@@ -71,4 +71,12 @@ export class NoteService {
   putNote(noteId: number, textNote: string) {
     return this.http.put<Note>(`${this.apiUrl}/notes/${noteId}`, { text: textNote });
   }
+
+  // --------------------------------------------
+  private noteToFormSource = new Subject<Note>();
+  editNoteProvider = this.noteToFormSource.asObservable();
+
+  notifySendNoteToForm(note: Note) {
+    this.noteToFormSource.next(note);
+  }
 }
